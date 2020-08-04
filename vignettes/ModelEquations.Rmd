@@ -1,57 +1,80 @@
 ---
 title: "Formal Model Equations"
 author: "Jessica Hicks (jhicks1@ufl.edu)"
-date: "7/20/2020"
+date: "8/03/2020"
 output: html_document
 ---
 
-## Drafting Equations
-Change of fast organic matter over time is equal to new additions (root turnover times root biomass times biomass allocation factor) minus the decay of fast organic matter (respiration).  
-$\frac{dC_{fast}}{dt} = \sum_z(f_{fast}r_{t}  B_{root}(z,t) - k_{fast}C_{fast}(z,t))$
+### Equations
+__Change of fast organic matter over time__ is equal to new additions (root turnover times root biomass times biomass allocation factor) minus the decay of fast organic matter (respiration).  
+$\frac{dC_{fast}}{dt} = \sum_z(f_{fast}r_{T}  B_{root}(z,t) - k_{fast}C_{fast}(z,t))$
 
-CO2/CH4 respiration is equal to the decay of fast organic matter times a conversion factor a, which denotes the conversion between organic matter mass and carbon mass of CO2.  
+_________________________________________________________________________________________
+
+__CO2/CH4 respiration__ is equal to the decay of fast organic matter times a conversion factor a, which denotes the conversion between organic matter mass and carbon mass of CO2.  
 $\frac{dC_{resp}}{dt} = \sum_zak_{fast}C_{fast}(z,t)$
 
-Change of slow organic matter over time is equal to new additions times one minus the fast organic matter allocation factor.
-$\frac{dC_{slow}}{dt} = (1 - f_{fast})r_{t}  B_{root}(z,t)$
+_________________________________________________________________________________________
 
-Total organic matter mass is equal to fast organic matter plus slow organic matter plus root biomass.  
+__Change of slow organic matter over time__ is equal to new organic matter additions times one minus the fast organic matter allocation factor.
+$\frac{dC_{slow}}{dt} = (1 - f_{fast})r_{T}  B_{root}(z,t)$
+
+_________________________________________________________________________________________
+
+
+__Total organic matter mass__ is equal to fast organic matter mass plus slow organic matter mass plus root biomass.  
 $C(z,t) = C_{fast}(z,t) + C_{slow}(z,t) + B_{root}(z,t)$
 
-Mineral Input is equal to the number of tides per year, times the unit area of interest, times the mean tidal volume above the marsh surface, times the suspended sediment concentration.  
+_________________________________________________________________________________________
+
+
+__Mineral input__ is equal to the number of tides per year, times the unit area of interest, times the mean tidal volume above the marsh surface, times the suspended sediment concentration.  
 when z=0: $\frac{dC_{mineral}}{dt} = n_{tides}  A_{unit} v_{tides}  s_{ssc}$
 
-Aboveground biomass is equal to a parabolic function with the following coefficients:  
-$c_{1} = \frac{-(z_{vegmin}B_{max} - z_{vegmax}B_{max})}{(z_{vegmin} - z_{vegpeak})(-z_{vegmax} + z_{vegpeak})}$  
-$c_{2} = \frac{-B{max}}{(z_{vegmin} - z_{vegpeak})(-z_{vegmax} + z_{vegpeak})}$  
-$c_{3} = \frac{z_{vegmin}z_{vegmax}B_{max}}{(z_{vegmin} - z_{vegpeak})(z_{vegmax} - z_{vegpeak})}$  
+_________________________________________________________________________________________
 
-$B_{above} = c_{1}z + c_{2}z^{2} + c_{3}$  
+__Aboveground biomass__ is equal to a parabolic function with the following coefficients:  
+$c_{1} = \frac{-(v_{min}B_{max} - v_{max}B_{max})}{(v_{min} - v_{peak})(-v_{max} + v_{peak})}$  
+$c_{2} = \frac{-B_{max}}{(v_{min} - v_{peak})(-v_{max} + v_{peak})}$  
+$c_{3} = \frac{v_{min}v_{max}B_{max}}{(v_{min} - v_{peak})(v_{max} - v_{peak})}$  
 
-Belowground biomass is equal to above ground biomass times the root to shoot ratio.  
+$B_{above} = c_{1}z + c_{2}z^{2} + c_{3}$ 
+
+_________________________________________________________________________________________
+
+__Belowground biomass__ is equal to above ground biomass times the root to shoot ratio.  
 $B_{below} = f_{root}B_{above}$
 
-The volume of a given cohort, i, is equal to the sum of fast and slow organic matter mass divided by the organic matter packing density plus the mineral mass divided by the mineral packing density.  
-for each z: $\frac{dv_{cohort}}{dtdi} = \frac{C_{fast} + C_{slow}}{d_{organic}} + \frac{C_{mineral}}{d_{mineral}}$
+_________________________________________________________________________________________
 
-The marsh accretion rate is equal to the change to total volume of cohorts (the sum of the volume of each individual cohort) across time.  
-$\frac{dz_{marsh}}{dt} = \sum_i\frac{dv_{cohort}}{dtdi}$
+__The volume of a given cohort, i__, is equal to the sum of fast and slow organic matter mass divided by the organic matter packing density plus the mineral mass divided by the mineral packing density.  
+for each i: $\frac{dV_{i}}{dt} = \frac{C_{fast} + C_{slow}}{\rho_{organic}} + \frac{C_{mineral}}{\rho_{mineral}}$
 
-### Variables:
-z = elevation (down from surface)  
+_________________________________________________________________________________________
+
+Assuming that the bottom of the marsh doesn't move, any change in volume causes a change in surface elevation.
+The __marsh accretion rate__ is equal to the change to total volume of cohorts (the sum of the volume of each individual cohort) across time.  
+$\frac{dz_{marsh}}{dt} = \sum_i\frac{dV_{i}}{dt}$
+
+_________________________________________________________________________________________
+
+
+### Index of Variables:
+z = elevation  
 t = time  
 C = mass of carbon  
 i = cohort
 f = allocation factor, fraction 
 $f_{root}$ = root to shoot ratio
-d = packing density  
+$\rho$ = packing density  
 B = biomass  
-$r_{t}$ = root turnover   
+$r_{T}$ = root turnover   
 a = conversion factor: organic matter mass to carbon mass  
 k = decay rate  
 B = biomass  
 $B_{max}$ = maximum biomass  
 $A_{unit}$ = unit area of interest  
-v = volume  
+V = volume 
+v = vegetation elevations (max, min, peak)
 $n_{tides}$ = number of tides  
-$s_{ssc}$ = suspended sediment concentration 
+$s_{ssc}$ = suspended sediment concentration
